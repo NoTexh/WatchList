@@ -1,0 +1,12 @@
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
+
+.cache/**
+/dist/**
+/node_modules/**
+/target/**
