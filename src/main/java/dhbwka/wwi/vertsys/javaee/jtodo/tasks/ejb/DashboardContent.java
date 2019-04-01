@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
+ * Copyright © 2019 Markus Scheuring, Kai Schmid, Tobias Frietsch
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -14,6 +14,7 @@ import dhbwka.wwi.vertsys.javaee.jtodo.dashboard.ejb.DashboardContentProvider;
 import dhbwka.wwi.vertsys.javaee.jtodo.dashboard.ejb.DashboardSection;
 import dhbwka.wwi.vertsys.javaee.jtodo.dashboard.ejb.DashboardTile;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Category;
+import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.MovieStatus;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.TaskStatus;
 import java.util.List;
 import javax.ejb.EJB;
@@ -29,7 +30,7 @@ public class DashboardContent implements DashboardContentProvider {
     private CategoryBean categoryBean;
 
     @EJB
-    private TaskBean taskBean;
+    private MovieBean movieBean;
 
     /**
      * Vom Dashboard aufgerufenen Methode, um die anzuzeigenden Rubriken und
@@ -83,25 +84,16 @@ public class DashboardContent implements DashboardContentProvider {
         section.getTiles().add(tile);
 
         // Ja Aufgabenstatus eine weitere Kachel erzeugen
-        for (TaskStatus status : TaskStatus.values()) {
+        for (MovieStatus status : MovieStatus.values()) {
             String cssClass1 = cssClass + " status-" + status.toString().toLowerCase();
             String icon = "";
-
+            
             switch (status) {
-                case OPEN:
+                case GESEHEN:
                     icon = "doc-text";
                     break;
-                case IN_PROGRESS:
+                case NICHT_GESEHEN:
                     icon = "rocket";
-                    break;
-                case FINISHED:
-                    icon = "ok";
-                    break;
-                case CANCELED:
-                    icon = "cancel";
-                    break;
-                case POSTPONED:
-                    icon = "bell-off-empty";
                     break;
             }
 
@@ -125,8 +117,8 @@ public class DashboardContent implements DashboardContentProvider {
      * @param icon
      * @return
      */
-    private DashboardTile createTile(Category category, TaskStatus status, String label, String cssClass, String icon) {
-        int amount = taskBean.search(null, category, status).size();
+    private DashboardTile createTile(Category category, MovieStatus status, String label, String cssClass, String icon) {
+        int amount = movieBean.search(null, category, status).size();
         String href = "/app/tasks/list/";
 
         if (category != null) {
