@@ -53,7 +53,7 @@
                         <input type="password" class="form-control" name="signup_password2" placeholder="Passwort wiederholen" required="required">
                     </div>        
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg btn-block">Jetzt Registrieren</button>
+                        <button type="submit" class="btn btn-secondary btn-lg btn-block">Jetzt Registrieren</button>
                     </div>
 
                     <%-- Fehlermeldung --%>

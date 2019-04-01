@@ -35,7 +35,7 @@
 
                         <%-- Button zum Abschicken --%>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-lg btn-block">Einloggen</button>
+                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Einloggen</button>
                         </div>
                     </div>
                 </form>

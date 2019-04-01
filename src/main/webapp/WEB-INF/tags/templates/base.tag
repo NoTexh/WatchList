@@ -22,7 +22,7 @@
     <head>
         <meta charset="utf-8" />
 
-        <title>Filmliste: ${title}</title>
+        <title>WatchList: ${title}</title>
 
         <!-- https://pixabay.com/de/flach-design-symbol-icon-www-2126884/ -->
         <link rel="shortcut icon" href="<c:url value="/img/favicon.png"/>">
