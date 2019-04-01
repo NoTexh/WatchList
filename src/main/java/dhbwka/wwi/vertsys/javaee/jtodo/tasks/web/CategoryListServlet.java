@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
+ * Copyright © 2019 Markus Scheuring, Kai Schmid, Tobias Frietsch
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -13,7 +13,9 @@ import dhbwka.wwi.vertsys.javaee.jtodo.common.web.FormValues;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.CategoryBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.ValidationBean;
+import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.MovieBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Category;
+import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Movie;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Task;
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +40,7 @@ public class CategoryListServlet extends HttpServlet {
     CategoryBean categoryBean;
 
     @EJB
-    TaskBean taskBean;
+    MovieBean movieBean;
 
     @EJB
     ValidationBean validationBean;
@@ -149,12 +151,12 @@ public class CategoryListServlet extends HttpServlet {
             }
 
             // Bei allen betroffenen Aufgaben, den Bezug zur Kategorie aufheben
-            List<Task> tasks = category.getTasks();
+            List<Movie> movies = category.getMovies();
 
-            if (tasks != null) {
-                tasks.forEach((Task task) -> {
-                    task.setCategory(null);
-                    this.taskBean.update(task);
+            if (movies != null) {
+                movies.forEach((Movie movie) -> {
+                    movie.setCategory(null);
+                    this.movieBean.update(movie);
                 });
             }
 
