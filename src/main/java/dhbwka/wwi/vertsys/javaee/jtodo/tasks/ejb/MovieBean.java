@@ -13,14 +13,16 @@ import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.EntityBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Category;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Movie;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.MovieStatus;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.TaskStatus;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+@Stateless
+@RolesAllowed("app-user")
 public class MovieBean extends EntityBean<Movie, Long> { 
    
     public MovieBean() {
@@ -32,7 +34,7 @@ public class MovieBean extends EntityBean<Movie, Long> {
      * @param username Benutzername
      * @return Alle Aufgaben des Benutzers
      */
-    public List<Task> findByUsername(String username) {
+    public List<Movie> findByUsername(String username) {
         return em.createQuery("SELECT m FROM Movie m WHERE m.owner.username = :username ORDER BY m.creationDate")
                  .setParameter("username", username)
                  .getResultList();
@@ -77,7 +79,7 @@ public class MovieBean extends EntityBean<Movie, Long> {
         
         // WHERE status = :status
         if (status != null) {
-            p = cb.and(p, cb.equal(from.get("status"), status));
+            p = cb.and(p, cb.equal(from.get("movieStatus"), status));
             query.where(p);
         }
         

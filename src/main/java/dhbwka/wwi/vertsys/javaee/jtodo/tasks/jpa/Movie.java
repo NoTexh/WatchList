@@ -62,7 +62,7 @@ public class Movie implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private TaskStatus movieStatus = TaskStatus.OPEN;
+    private MovieStatus movieStatus = MovieStatus.NICHT_GESEHEN;
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public Movie() {

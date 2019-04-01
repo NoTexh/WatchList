@@ -15,7 +15,6 @@ import dhbwka.wwi.vertsys.javaee.jtodo.dashboard.ejb.DashboardSection;
 import dhbwka.wwi.vertsys.javaee.jtodo.dashboard.ejb.DashboardTile;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Category;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.MovieStatus;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.TaskStatus;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -23,7 +22,7 @@ import javax.ejb.Stateless;
 /**
  * EJB zur Definition der Dashboard-Kacheln für Aufgaben.
  */
-@Stateless(name = "tasks")
+@Stateless(name = "movies")
 public class DashboardContent implements DashboardContentProvider {
 
     @EJB
@@ -119,7 +118,7 @@ public class DashboardContent implements DashboardContentProvider {
      */
     private DashboardTile createTile(Category category, MovieStatus status, String label, String cssClass, String icon) {
         int amount = movieBean.search(null, category, status).size();
-        String href = "/app/tasks/list/";
+        String href = "/app/movies/list/";
 
         if (category != null) {
             href = WebUtils.addQueryParameter(href, "search_category", "" + category.getId());
