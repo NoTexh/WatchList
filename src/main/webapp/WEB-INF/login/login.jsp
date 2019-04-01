@@ -30,27 +30,26 @@
 
     <jsp:attribute name="content">
         <div class="container">
-            <form action="j_security_check" method="post" class="stacked">
-                <div class="column">
-                    <%-- Eingabefelder --%>
-                    <label for="j_username">
-                        Benutzername:
-                        <span class="required">*</span>
-                    </label>
-                    <input type="text" name="j_username">
+            <div class="row pt-4">
+                <div class="login-form col-6">
+                    <form action="j_security_check" method="post" class="stacked">
+                        <div class="column">
+                            <%-- Eingabefelder --%>
+                            <div class="form-group">
+                                <input type="username" name="j_username" class="form-control" placeholder="Benutzername" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="j_password" class="form-control" placeholder="Passwort" required>
+                            </div>
 
-                    <label for="j_password">
-                        Passwort:
-                        <span class="required">*</span>
-                    </label>
-                    <input type="password" name="j_password">
-
-                    <%-- Button zum Abschicken --%>
-                    <button class="icon-login" type="submit">
-                        Einloggen
-                    </button>
+                            <%-- Button zum Abschicken --%>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-lg btn-block">Einloggen</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </jsp:attribute>
 </template:base>
