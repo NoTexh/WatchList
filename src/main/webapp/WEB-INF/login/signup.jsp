@@ -44,12 +44,6 @@
                         </div>
                     </div> 
                     <div class="form-group">
-                        <input type="address" class="form-control" name="address" placeholder="Addresse" required="required">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required="required">
-                    </div>
-                    <div class="form-group">
                         <input type="text" class="form-control" name="signup_username" value="Benutzername" required="required">
                     </div>
                     <div class="form-group">
