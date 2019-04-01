@@ -54,8 +54,8 @@ public class SignUpServlet extends HttpServlet {
             throws ServletException, IOException {
         
         // Formulareingaben auslesen        
-        String firstname = request.getParameter(("signup_firstname"));
-        String lastname = request.getParameter(("signup_lastname"));
+        String firstname = request.getParameter("signup_firstname");
+        String lastname = request.getParameter("signup_lastname");
         String username = request.getParameter("signup_username");
         String password1 = request.getParameter("signup_password1");
         String password2 = request.getParameter("signup_password2");

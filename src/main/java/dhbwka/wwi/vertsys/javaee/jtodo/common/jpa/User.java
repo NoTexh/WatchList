@@ -29,11 +29,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Data;
 
 /**
  * Datenbankklasse für einen Benutzer.
  */
 @Entity
+@Data
 @Table(name = "WATCHLIST_USER")
 public class User implements Serializable {
 
@@ -88,40 +90,6 @@ public class User implements Serializable {
         this.username = username;
         this.password.password = password;
         this.passwordHash = this.hashPassword(password);
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Setter und Getter">    
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-    
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.username = lastname;
-    }
-    
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String id) {
-        this.username = id;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
     //</editor-fold>
 

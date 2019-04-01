@@ -31,30 +31,27 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <div class="row pt-4">
+        <div class="row">
+            <div class="col"></div>
             <div class="signup-form col-6">
-                <form action="/WebProjekt/register" method="post">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="first_name" placeholder="Vorname" required="required">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="last_name" placeholder="Nachname" required="required">
-                        </div>
-                    </div> 
+                <form method="post" class="stacked">
+                    <%-- CSRF-Token --%>
+                    <input type="hidden" name="csrf_token" value="${csrf_token}">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="signup_username" value="Benutzername" required="required">
+                        <input type="text" class="form-control" name="signup_firstname" placeholder="Vorname" required="required">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="signup_password1" value="Passwort" required="required">
+                        <input type="text" class="form-control" name="signup_lastname" placeholder="Nachname" required="required">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="signup_password2" value="Passwort wiederholen" required="required">
+                        <input type="text" class="form-control" name="signup_username" placeholder="Benutzername" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="signup_password1" placeholder="Passwort" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="signup_password2" placeholder="Passwort wiederholen" required="required">
                     </div>        
-                    <div class="form-group">
-                        <label class="checkbox-inline"><input type="checkbox" required="required"> Ich akzeptiere <a href="#">Nutzungsbedingungen</a> &amp; <a href="#">Datenschutzbestimmungen</a></label>
-                    </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-success btn-lg btn-block">Jetzt Registrieren</button>
                     </div>
@@ -70,7 +67,7 @@
 
                 </form>
             </div>
+            <div class="col"></div>
         </div>
-    </div>
-</jsp:attribute>
+    </jsp:attribute>
 </template:base>
