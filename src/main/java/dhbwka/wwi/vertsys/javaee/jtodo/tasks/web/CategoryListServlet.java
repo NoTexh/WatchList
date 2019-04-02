@@ -11,12 +11,10 @@ package dhbwka.wwi.vertsys.javaee.jtodo.tasks.web;
 
 import dhbwka.wwi.vertsys.javaee.jtodo.common.web.FormValues;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.MovieBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Category;
 import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Movie;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Task;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -33,7 +31,7 @@ import javax.servlet.http.HttpSession;
  * Formular, mit dem ein neue Kategorie angelegt werden kann, sowie eine Liste,
  * die zum Löschen der Kategorien verwendet werden kann.
  */
-@WebServlet(urlPatterns = {"/app/tasks/categories/"})
+@WebServlet(urlPatterns = {"/app/movies/categories/"})
 public class CategoryListServlet extends HttpServlet {
 
     @EJB
@@ -53,7 +51,7 @@ public class CategoryListServlet extends HttpServlet {
         request.setAttribute("categories", this.categoryBean.findAllSorted());
 
         // Anfrage an dazugerhörige JSP weiterleiten
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks/category_list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/movies/category_list.jsp");
         dispatcher.forward(request, response);
 
         // Alte Formulardaten aus der Session entfernen

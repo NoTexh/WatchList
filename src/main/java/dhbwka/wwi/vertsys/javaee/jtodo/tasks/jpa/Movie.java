@@ -11,8 +11,7 @@ package dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa;
 
 import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -52,13 +51,13 @@ public class Movie implements Serializable {
     private Date creationDate;
     
     @Column(length = 50)
-    @NotNull(message = "Die Bezeichnung darf nicht leer sein.")
-    @Size(min = 1, max = 50, message = "Die Bezeichnung muss zwischen 1 und 50 Zeichen lang sein.")
+    @NotNull(message = "Der Filmtitel darf nicht leer sein.")
+    @Size(min = 1, max = 50, message = "Der Filmtitel muss zwischen 1 und 50 Zeichen lang sein.")
     private String movieTitle;
 
     @Lob
     @NotNull
-    private String movieDescripton;
+    private String movieDescription;
 
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -68,12 +67,12 @@ public class Movie implements Serializable {
     public Movie() {
     }
 
-    public Movie(User owner, Category category, String movieTitle, String movieDescripton ) {
+    public Movie(User owner, Category category, String movieTitle, String movieDescripton, Date creationDate ) {
         this.owner = owner;
         this.category = category;
         this.movieTitle = movieTitle;
-        this.movieDescripton = movieDescripton;
-        this.creationDate = new Date();
+        this.movieDescription = movieDescripton;
+        this.creationDate = creationDate;
         
         
         
