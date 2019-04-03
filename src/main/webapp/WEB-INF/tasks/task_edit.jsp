@@ -37,6 +37,10 @@
         <div class="menuitem">
             <a href="<c:url value="/app/tasks/list/"/>">Liste</a>
         </div>
+        
+        <div class="menuitem">
+            <a href="<c:url value="/app/tasks/management/"/>">Benutzer verwalten</a>
+        </div>
     </jsp:attribute>
 
     <jsp:attribute name="content">
