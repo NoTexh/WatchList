@@ -38,4 +38,44 @@ public class SoapService {
        return movieBean.findAll();
    }
    
+    @WebMethod
+    @WebResult(name = "movie")
+    public Movie saveNewMovie(
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password,
+            @WebParam(name = "movie") Movie movie
+    ) throws UserBean.InvalidCredentialsException {
+        
+        userBean.validateUser(username, password);       
+       
+        return this.movieBean.saveNew(movie);
+    }
+    
+    @WebMethod
+    @WebResult(name = "movie")
+    public Movie updateExistingMovie(
+            @WebParam(name = "username", header = true) String username,
+            @WebParam(name = "password", header = true) String password,
+            @WebParam(name = "movie") Movie movie
+    ) throws UserBean.InvalidCredentialsException {
+       
+        userBean.validateUser(username, password);
+        
+        
+        return this.movieBean.update(movie);
+    }
+
+    @WebMethod
+    public void deleteMovie(
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password,
+            @WebParam(name = "movie") Movie movie
+    ) throws UserBean.InvalidCredentialsException{
+
+        userBean.validateUser(username, password);
+
+        this.movieBean.delete(movie);
+    }
+   
+   
 }
