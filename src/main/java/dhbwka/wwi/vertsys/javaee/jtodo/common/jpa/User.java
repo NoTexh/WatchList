@@ -29,11 +29,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Data;
 
 /**
  * Datenbankklasse für einen Benutzer.
  */
 @Entity
+@Data
 @Table(name = "WATCHLIST_USER")
 public class User implements Serializable {
 
@@ -45,6 +47,16 @@ public class User implements Serializable {
     @Size(min = 5, max = 64, message = "Der Benutzername muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Der Benutzername darf nicht leer sein.")
     private String username;
+    
+    @Column(name = "FIRSTNAME", length = 64)
+    @Size(min = 2, max = 64, message = "Der Benutzername muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Der Benutzername darf nicht leer sein.")
+    private String firstname;
+    
+    @Column(name = "LASTNAME", length = 64)
+    @Size(min = 2, max = 64, message = "Der Benutzername muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Der Benutzername darf nicht leer sein.")
+    private String lastname;
     
     public class Password {
         @Size(min = 6, max = 64, message = "Das Passwort muss zwischen sechs und 64 Zeichen lang sein.")
@@ -72,28 +84,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String firstname, String lastname, String username, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.username = username;
         this.password.password = password;
         this.passwordHash = this.hashPassword(password);
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Setter und Getter">
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String id) {
-        this.username = id;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
     //</editor-fold>
 
