@@ -1,35 +1,37 @@
-<%-- 
-    Copyright © 2018 Dennis Schulmeister-Zimolong
 
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<c:set var="base_url" value="<%=request.getContextPath()%>" />
-
 <template:base>
     <jsp:attribute name="title">
-        Registrierung
+        Benutzerverwaltung
     </jsp:attribute>
 
     <jsp:attribute name="head">
-        <link rel="stylesheet" href="<c:url value="/css/login.css"/>" />
+
     </jsp:attribute>
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/logout/"/>">Einloggen</a>
+            <a href="<c:url value="/app/dashboard/"/>">Dashboard</a>
+        </div>
+        
+        <div class="menuitem">
+            <a href="<c:url value="/app/tasks/list/"/>">Liste</a>
+        </div>
+
+        <div class="menuitem">
+            <a href="<c:url value="/app/tasks/task/new/"/>">Film hinzufügen</a>
+        </div>
+
+        <div class="menuitem">
+            <a href="<c:url value="/app/tasks/categories/"/>">Kategorien bearbeiten</a>
         </div>
     </jsp:attribute>
-
+        
     <jsp:attribute name="content">
         <div class="row">
             <div class="col"></div>
@@ -38,22 +40,19 @@
                     <%-- CSRF-Token --%>
                     <input type="hidden" name="csrf_token" value="${csrf_token}">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="signup_firstname" placeholder="Vorname" required="required">
+                        <input type="text" class="form-control" name="signup_firstname" value="${first_name}">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="signup_lastname" placeholder="Nachname" required="required">
+                        <input type="text" class="form-control" name="signup_lastname" value="${last_name}">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="signup_username" placeholder="Benutzername" required="required">
+                        <input type="password" class="form-control" name="signup_password1" placeholder="Passwort">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="signup_password1" placeholder="Passwort" required="required">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="signup_password2" placeholder="Passwort wiederholen" required="required">
+                        <input type="password" class="form-control" name="signup_password2" placeholder="Passwort wiederholen">
                     </div>        
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary btn-lg btn-block">Jetzt Registrieren</button>
+                        <button type="submit" class="btn btn-secondary btn-lg btn-block">Jetzt Ändern</button>
                     </div>
 
                     <%-- Fehlermeldung --%>
@@ -64,7 +63,6 @@
                                 </c:forEach>
                         </ul>
                     </c:if>
-
                 </form>
             </div>
             <div class="col"></div>

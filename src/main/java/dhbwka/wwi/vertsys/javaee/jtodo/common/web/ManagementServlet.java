@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
+ * Copyright © 2019 Markus Scheuring, Kai Schmid, Tobias Frietsch
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -9,10 +9,11 @@
  */
 package dhbwka.wwi.vertsys.javaee.jtodo.common.web;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.UserBean;
+import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -23,14 +24,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet für die Registrierungsseite. Hier kann sich ein neuer Benutzer
- * registrieren. Anschließend wird der auf die Startseite weitergeleitet.
- */
-@WebServlet(urlPatterns = {"/signup/"})
-public class SignUpServlet extends HttpServlet {
-    
-    @EJB
+@WebServlet(urlPatterns = {"/app/tasks/management/"})
+public class ManagementServlet extends HttpServlet {
+
+     @EJB
     ValidationBean validationBean;
             
     @EJB
@@ -38,50 +35,46 @@ public class SignUpServlet extends HttpServlet {
     
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException, ServletException {
         
-        // Anfrage an dazugerhörige JSP weiterleiten
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/login/signup.jsp");
+        User user = this.userBean.getCurrentUser();
+        request.setAttribute("first_name", user.getFirstname());
+        request.setAttribute("last_name", user.getLastname());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/management/management.jsp");
         dispatcher.forward(request, response);
-        
-        // Alte Formulardaten aus der Session entfernen
-        HttpSession session = request.getSession();
-        session.removeAttribute("signup_form");
     }
-    
+
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        // Formulareingaben auslesen        
+        User user = this.userBean.getCurrentUser();
         String firstname = request.getParameter("signup_firstname");
         String lastname = request.getParameter("signup_lastname");
-        String username = request.getParameter("signup_username");
         String password1 = request.getParameter("signup_password1");
         String password2 = request.getParameter("signup_password2");
+        List<String> errors = new ArrayList<>();
         
-        // Eingaben prüfen
-        User user = new User(firstname, lastname, username, password1);
-        List<String> errors = this.validationBean.validate(user);
-        this.validationBean.validate(user.getPassword(), errors);
+        User currentUser = this.userBean.getCurrentUser();
         
         if (password1 != null && password2 != null && !password1.equals(password2)) {
             errors.add("Die beiden Passwörter stimmen nicht überein.");
         }
         
-        // Neuen Benutzer anlegen
-        if (errors.isEmpty()) {
-            try {
-                this.userBean.signup(firstname, lastname, username, password1);
-            } catch (UserBean.UserAlreadyExistsException ex) {
-                errors.add(ex.getMessage());
-            }
+        if(firstname != null && !"".equals(firstname)){
+            currentUser.setFirstname(firstname);
+        }
+        if(lastname != null && !"".equals(lastname)){
+            currentUser.setLastname(lastname);
+        }
+        if(password1 != null && !"".equals(password1)){
+            currentUser.setPassword(password1);
         }
         
-        // Weiter zur nächsten Seite
+        
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
-            request.login(username, password1);
+            //request.login(username, password1);
+            this.userBean.update(currentUser);
             response.sendRedirect(WebUtils.appUrl(request, "/app/dashboard/"));
         } else {
             // Fehler: Formuler erneut anzeigen
@@ -94,6 +87,10 @@ public class SignUpServlet extends HttpServlet {
             
             response.sendRedirect(request.getRequestURI());
         }
+        
+        
     }
     
+    
+
 }
