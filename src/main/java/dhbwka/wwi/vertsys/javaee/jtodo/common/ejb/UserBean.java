@@ -88,7 +88,15 @@ public class UserBean {
     public User update(User user) {
         return em.merge(user);
     }
-
+    
+    public String validateUser(String username,String password) throws InvalidCredentialsException{
+        User user = em.find(User.class, username);
+        if(user == null || !user.checkPassword(password)){
+            throw new InvalidCredentialsException("ungültige Benutzerdaten");
+        }else{
+            return "Gültiger Benutzer";
+        }
+    }
     /**
      * Fehler: Der Benutzername ist bereits vergeben
      */
