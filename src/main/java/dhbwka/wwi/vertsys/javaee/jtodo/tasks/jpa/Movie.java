@@ -71,7 +71,7 @@ public class Movie implements Serializable {
         this.owner = owner;
         this.category = category;
         this.movieTitle = movieTitle;
-        this.movieDescription = movieDescripton;
+        this.movieDescription = movieDescription;
         this.creationDate = creationDate;
         
         
