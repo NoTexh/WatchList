@@ -20,15 +20,15 @@
         </div>
         
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/list/"/>">Liste</a>
+            <a href="<c:url value="/app/movies/list/"/>">Liste</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/task/new/"/>">Film hinzufügen</a>
+            <a href="<c:url value="/app/movies/movie/new/"/>">Film hinzufügen</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/categories/"/>">Kategorien bearbeiten</a>
+            <a href="<c:url value="/app/movies/categories/"/>">Kategorien bearbeiten</a>
         </div>
     </jsp:attribute>
         

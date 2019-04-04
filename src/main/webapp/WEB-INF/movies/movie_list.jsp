@@ -34,6 +34,9 @@
         <div class="menuitem">
             <a href="<c:url value="/app/movies/categories/"/>">Kategorien bearbeiten</a>
         </div>
+        <div class="menuitem">
+            <a href="<c:url value="/app/movies/management/"/>">Benutzer verwalten</a>
+        </div>
     </jsp:attribute>
 
     <jsp:attribute name="content">
