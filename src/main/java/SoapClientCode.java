@@ -1,5 +1,5 @@
 /*
-package dhbw.wwi.vertsys.soap_client;
+package dhbw.wwi.vertsys.watchlist_soap_client;
 
 import dhbw.wwi.vertsys.javaee.jtodo.soap.InvalidCredentialsException_Exception;
 import dhbw.wwi.vertsys.javaee.jtodo.soap.Movie;
@@ -14,7 +14,7 @@ public class SoapClient {
         // Stub-Objekt zum entfernten Aufruf erstellen
         SoapServiceService service = new SoapServiceService();
         SoapService movieWs = service.getSoapServicePort();
-        String user = "sasas";
+        String user = "markus98";
         String pw = "123456";
         // Webservice-Operation "findAll" aufrufen
         List<Movie> allMovies;
@@ -29,7 +29,7 @@ public class SoapClient {
 
         for (Movie movie : allMovies) {
             System.out.println("Name:         " + movie.getMovieTitle());
-            System.out.println("Beschreibung: " + movie.getMovieDescripton());
+            System.out.println("Beschreibung: " + movie.getMovieDescription());
             System.out.println("Erstellt am:         " + movie.getCreationDate());
             System.out.println("Kategorie:         " + movie.getCategory());
             System.out.println("Status:         " + movie.getMovieStatus());
@@ -38,4 +38,3 @@ public class SoapClient {
     }
 }
 */
-
