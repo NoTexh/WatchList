@@ -23,59 +23,42 @@ import javax.jws.WebService;
 @WebService
 @Stateless
 public class SoapService {
-    
-   @EJB MovieBean movieBean;
-   @EJB UserBean userBean;
- 
-   @WebMethod
-   @WebResult(name = "movies")
-   public List<Movie> findMovies(
-           @WebParam(name="username") String username,
-           @WebParam(name="password") String password
-   ) throws UserBean.InvalidCredentialsException
-   {     
-       this.userBean.validateUser(username, password);
-       return movieBean.findAll();
-   }
-   
+
+    @EJB
+    MovieBean movieBean;
+    @EJB
+    UserBean userBean;
+
     @WebMethod
-    @WebResult(name = "movie")
-    public Movie saveNewMovie(
+    @WebResult(name = "movies")
+    public List<Movie> findMovies(
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password
+    ) throws UserBean.InvalidCredentialsException {
+        this.userBean.validateUser(username, password);
+        return movieBean.findAll();
+    }
+
+    @WebMethod
+    @WebResult(name = "movies")
+    public Movie findMovieById(
             @WebParam(name = "username") String username,
             @WebParam(name = "password") String password,
-            @WebParam(name = "movie") Movie movie
+            @WebParam(name = "id") long id
     ) throws UserBean.InvalidCredentialsException {
-        
-        userBean.validateUser(username, password);       
-       
-        return this.movieBean.saveNew(movie);
-    }
-    
-    @WebMethod
-    @WebResult(name = "movie")
-    public Movie updateExistingMovie(
-            @WebParam(name = "username", header = true) String username,
-            @WebParam(name = "password", header = true) String password,
-            @WebParam(name = "movie") Movie movie
-    ) throws UserBean.InvalidCredentialsException {
-       
-        userBean.validateUser(username, password);
-        
-        
-        return this.movieBean.update(movie);
+        this.userBean.validateUser(username, password);
+        return movieBean.findById(id);
     }
 
     @WebMethod
-    public void deleteMovie(
+    @WebResult(name = "movies")
+    public List<Movie> findMoviesByUser(
             @WebParam(name = "username") String username,
             @WebParam(name = "password") String password,
-            @WebParam(name = "movie") Movie movie
-    ) throws UserBean.InvalidCredentialsException{
-
-        userBean.validateUser(username, password);
-
-        this.movieBean.delete(movie);
+            @WebParam(name = "suchuser") String suchuser
+    ) throws UserBean.InvalidCredentialsException {
+        this.userBean.validateUser(username, password);
+        return movieBean.findByUsername(suchuser);
     }
-   
-   
+
 }
