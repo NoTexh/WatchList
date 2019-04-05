@@ -90,8 +90,13 @@ header, main {
 
 /* Farben für Links */
 a, a:visited {
-    color: rgb(160, 160, 160);
+    color: rgb(160,160,160);
     text-decoration: none;
+}
+
+.sectionTitle, .sectionTitle:visited {
+    color: rgb(22,133,158);
+    font-weight: bold;
 }
 
 a:hover {
