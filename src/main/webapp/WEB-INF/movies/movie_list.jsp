@@ -73,7 +73,7 @@
         <c:choose>
             <c:when test="${empty movies}">
                 <p>
-                    Es wurden keine Filme gefunden. 🐈
+                    Es wurden keine Filme gefunden.
                 </p>
             </c:when>
             <c:otherwise>
@@ -91,7 +91,7 @@
                     <c:forEach items="${movies}" var="movie">
                         <tr>
                             <td>
-                                <a href="<c:url value="/app/movies/movie/${movie.movieId}/"/>">
+                                <a class="sectionTitle" href="<c:url value="/app/movies/movie/${movie.movieId}/"/>">
                                     <c:out value="${movie.movieTitle}"/>
                                 </a>
                             </td>
